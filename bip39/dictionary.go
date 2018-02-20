@@ -1,11 +1,10 @@
 package bip39
 
 import (
-	"bufio"
 	"fmt"
 	"log"
 	"math"
-	"os"
+	"strings"
 )
 
 //we keep all the dics in the memory for fast access
@@ -67,23 +66,12 @@ func dictionary() ([]string, error) {
 	dict[lang] = make([]string, size)
 	reverseDict[lang] = make(map[string]int, size)
 
-	file, err := os.Open("files/" + lang + ".txt")
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
+	words := strings.Split(strings.TrimSpace(EnglishWords), "\n")
 	i := 0
-	for scanner.Scan() {
-		word := scanner.Text()
+	for _, word := range words {
 		dict[lang][i] = word
 		reverseDict[lang][word] = i
 		i++
-	}
-
-	if err = scanner.Err(); err != nil {
-		log.Fatal(err)
 	}
 
 	if i != size {

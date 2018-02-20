@@ -1,3 +1,6 @@
+package bip39
+
+const EnglishWords = `
 abandon
 ability
 able
@@ -2046,3 +2049,4 @@ zebra
 zero
 zone
 zoo
+`
