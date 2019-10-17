@@ -206,6 +206,10 @@ func (m *Mnemonic) GetEntropyStrHex() (string, error) {
 	return hex.EncodeToString(m.ent), nil
 }
 
+func (m *Mnemonic) GetEntropy() []byte {
+	return m.ent
+}
+
 func generateRandomEntropy(bitsCount int) (ent []byte, err error) {
 	err = validBitsCount(bitsCount)
 	if err != nil {
